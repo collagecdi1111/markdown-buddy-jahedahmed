@@ -47,7 +47,7 @@ Needs R 4.1+ (for the native pipe-friendly tidyr version).
 1. Clone:
 
    ```bash
-   git clone https://github.com/<username>/markdown-buddy-jahedahmed.git && cd markdown-buddy-jahedahmed
+   git clone https://github.com/collagecdi1111/markdown-buddy-jahedahmed.git && cd markdown-buddy-jahedahmed
    ```
 
 2. Packages:
