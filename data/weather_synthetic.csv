@@ -1,0 +1,11 @@
+date,city,temp_max_c,temp_min_c,rain_mm
+2026-07-01,Toronto,28,18,0
+2026-07-02,Toronto,30,20,2.5
+2026-07-03,Toronto,26,17,8.0
+2026-07-04,Toronto,27,16,0
+2026-07-05,Toronto,29,19,0
+2026-07-01,Calgary,24,11,0
+2026-07-02,Calgary,22,10,4.2
+2026-07-03,Calgary,25,12,0
+2026-07-04,Calgary,27,13,0
+2026-07-05,Calgary,21,9,6.1

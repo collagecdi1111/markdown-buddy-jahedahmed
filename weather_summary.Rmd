@@ -1,0 +1,99 @@
+---
+title: "Daily Weather Summary with tidyr"
+subtitle: "Documentation for `weather_summary.R`"
+author: "Jahed Ahmed"
+date: "October 17, 2026"
+output:
+  html_document:
+    theme: journal
+    toc: true
+    toc_float: true
+    highlight: zenburn
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, message = FALSE, out.width = "90%")
+```
+
+> **AI Assistance Declaration:** I used Claude (Anthropic, Opus 5.5) on October 17, 2026 for R Markdown layout for the reshaping steps. Prompts used: in Appendix.md. I verified outputs using a Posit Cloud knit and the GitHub preview. All final calculations are done by myself. I am responsible for the accuracy and originality of this work.
+
+# Purpose
+
+Summarises synthetic daily weather for two cities, reshaping the data with tidyr to compare temperature ranges and count rainy days.
+
+# Inputs
+
+## Data
+
+Reads from **`data/weather_synthetic.csv`** (synthetic).
+
+| Column | Description |
+|--------|-------------|
+| `date` | Observation date |
+| `city` | Toronto or Calgary |
+| `temp_max_c` | Daily high in Celsius |
+| `temp_min_c` | Daily low in Celsius |
+| `rain_mm` | Rainfall in millimetres |
+
+## Packages
+
+```{r packages}
+library(readr)
+library(dplyr)
+library(tidyr)
+library(ggplot2)
+```
+
+# Processing Steps
+
+## 1. Import
+
+```{r import}
+weather <- read_csv("data/weather_synthetic.csv", show_col_types = FALSE)
+```
+
+## 2. Reshape
+
+```{r reshape}
+weather_long <- weather %>%
+  pivot_longer(c(temp_max_c, temp_min_c),
+               names_to = "measure", values_to = "temp_c")
+```
+
+## 3. Summarise
+
+```{r summarise}
+city_temps <- weather_long %>%
+  group_by(city, measure) %>%
+  summarise(avg_temp = mean(temp_c), .groups = "drop")
+
+rainy_days <- weather %>%
+  group_by(city) %>%
+  summarise(rainy_days = sum(rain_mm > 0), .groups = "drop")
+```
+
+## 4. Visualise
+
+```{r visualise}
+ggplot(weather_long, aes(date, temp_c, colour = measure)) +
+  geom_line() +
+  facet_wrap(~ city) +
+  labs(title = "Daily High and Low", x = NULL, y = "Temperature (C)")
+```
+
+# Outputs
+
+- `weather_long` - long-format temperature table
+- `city_temps` - average high and low per city
+- `rainy_days` - count of days with rain per city
+- Faceted line chart
+
+```{r preview-output}
+knitr::kable(weather_long)
+```
+
+# Render Instructions
+
+1. Install the four packages.
+2. Run `rmarkdown::render()` or click Knit.
+3. Open the HTML file that appears.
