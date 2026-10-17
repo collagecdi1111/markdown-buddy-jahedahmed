@@ -59,7 +59,7 @@ Changes I applied:
 
 _Tick each item after completing it:_
 
-- [ ] Counted rainy days manually in Google Sheets
-- [ ] Compared with the tidyr README
-- [ ] Knit finished with no warnings
-- [ ] README tables and code rendered on GitHub
+- [x] Counted rainy days manually in Google Sheets
+- [x] Compared with the tidyr README
+- [x] Knit finished with no warnings
+- [x] README tables and code rendered on GitHub
